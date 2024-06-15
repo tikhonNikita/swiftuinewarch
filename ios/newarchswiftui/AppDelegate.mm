@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
+#import "newarchswiftui-Swift.h"
 
 @implementation AppDelegate
 
@@ -16,6 +17,8 @@
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
+  NSString *randomStr = [RandomStringGenerator randomStringWithLength:10];
+  NSLog(@"Generated random string: %@", randomStr);
   return [self bundleURL];
 }
 
