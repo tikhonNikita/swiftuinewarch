@@ -8,6 +8,7 @@
 #import "RCTFabricComponentsPlugins.h"
 #import "react-native-sui-view-Bridging-Header.h"
 #import "react_native_sui_view-Swift.h"
+#import "RandomTextView.h"
 
 using namespace facebook::react;
 
@@ -30,7 +31,7 @@ using namespace facebook::react;
     static const auto defaultProps = std::make_shared<const SuiViewViewProps>();
     _props = defaultProps;
       
-    _view = [[UIView alloc] init];
+    _view = [[RandomTextView alloc] init];
 
     self.contentView = _view;
   }
