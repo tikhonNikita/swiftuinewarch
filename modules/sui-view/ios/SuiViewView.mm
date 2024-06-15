@@ -6,6 +6,8 @@
 #import <react/renderer/components/RNSuiViewViewSpec/RCTComponentViewHelpers.h>
 
 #import "RCTFabricComponentsPlugins.h"
+#import "react-native-sui-view-Bridging-Header.h"
+#import "react_native_sui_view-Swift.h"
 
 using namespace facebook::react;
 
@@ -27,7 +29,7 @@ using namespace facebook::react;
   if (self = [super initWithFrame:frame]) {
     static const auto defaultProps = std::make_shared<const SuiViewViewProps>();
     _props = defaultProps;
-
+      
     _view = [[UIView alloc] init];
 
     self.contentView = _view;
@@ -40,6 +42,9 @@ using namespace facebook::react;
 {
     const auto &oldViewProps = *std::static_pointer_cast<SuiViewViewProps const>(_props);
     const auto &newViewProps = *std::static_pointer_cast<SuiViewViewProps const>(props);
+    
+    NSString *randomStr = [RandomStringGenerator randomStringWithLength:10];
+    NSLog(@"Generated random string: %@", randomStr);
 
     if (oldViewProps.color != newViewProps.color) {
         NSString * colorToConvert = [[NSString alloc] initWithUTF8String: newViewProps.color.c_str()];
