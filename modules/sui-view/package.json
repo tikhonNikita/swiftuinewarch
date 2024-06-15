@@ -1,0 +1,14 @@
+{
+  "name": "react-native-sui-view",
+  "version": "0.0.0",
+  "description": "my library for testing swiftui",
+  "main": "src/index",
+  "codegenConfig": {
+    "name": "RNSuiViewViewSpec",
+    "type": "components",
+    "jsSrcsDir": "src"
+  },
+  "author": " <> ()",
+  "license": "UNLICENSED",
+  "homepage": "#readme"
+}

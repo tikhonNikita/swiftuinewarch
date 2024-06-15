@@ -5,13 +5,15 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "pod": "cd ios; RCT_NEW_ARCH_ENABLED=1 bundle exec pod install",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
     "react": "18.2.0",
-    "react-native": "0.74.2"
+    "react-native": "0.74.2",
+    "react-native-sui-view": "link:./modules/sui-view"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
