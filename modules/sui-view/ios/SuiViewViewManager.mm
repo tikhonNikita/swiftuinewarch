@@ -15,5 +15,6 @@ RCT_EXPORT_MODULE(SuiViewView)
 }
 
 RCT_EXPORT_VIEW_PROPERTY(color, NSString)
+RCT_EXPORT_VIEW_PROPERTY(onColorChange, RCTDirectEventBlock)
 
 @end

@@ -6,7 +6,10 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.screenContainer}>
       <SuiViewViewNativeComponent
-        color="red"
+        onColorChange={event => {
+          console.log(event.nativeEvent);
+        }}
+        color="blue"
         style={{width: 300, height: 300}}
       />
     </SafeAreaView>

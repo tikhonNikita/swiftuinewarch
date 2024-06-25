@@ -9,6 +9,7 @@
 #import "react-native-sui-view-Bridging-Header.h"
 #import "react_native_sui_view-Swift.h"
 #import "RandomTextView.h"
+#import <React/RCTBridge+Private.h>
 
 using namespace facebook::react;
 
@@ -52,6 +53,16 @@ using namespace facebook::react;
         [_view setBackgroundColor:[self hexStringToColor:colorToConvert]];
     }
 
+    if (_eventEmitter != nullptr) {
+        // Cast the _eventEmitter to a shared_ptr of const SuiViewViewEventEmitter
+        static const auto emitter = std::dynamic_pointer_cast<const facebook::react::SuiViewViewEventEmitter>(_eventEmitter);
+
+        // Check if the casting is successful
+        if (emitter) {
+            // Call the onColorChange method with the necessary parameter
+            emitter->onColorChange(facebook::react::SuiViewViewEventEmitter::OnColorChange{"#FFFFFF"}); // Pass appropriate color value
+        }
+    }
     [super updateProps:props oldProps:oldProps];
 }
 
