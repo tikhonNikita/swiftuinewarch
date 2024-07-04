@@ -8,8 +8,8 @@
 #import "RCTFabricComponentsPlugins.h"
 #import "react-native-sui-view-Bridging-Header.h"
 #import "react_native_sui_view-Swift.h"
-#import "RandomTextView.h"
 #import <React/RCTBridge+Private.h>
+#import "react_native_sui_view-Swift.h"
 
 using namespace facebook::react;
 
@@ -18,6 +18,7 @@ using namespace facebook::react;
 @end
 
 @implementation SuiViewView {
+    RandomTextHostingController *_hostingController;
     UIView * _view;
 }
 
@@ -32,12 +33,43 @@ using namespace facebook::react;
     static const auto defaultProps = std::make_shared<const SuiViewViewProps>();
     _props = defaultProps;
       
-    _view = [[RandomTextView alloc] init];
+      if (self) {
+              [self setupView];
+          }
+          return self;
 
     self.contentView = _view;
   }
 
   return self;
+}
+
+- (void)setupView {
+    _hostingController = [RandomTextHostingController createViewController];
+    
+
+    UIView *swiftUIView = _hostingController.view;
+    swiftUIView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self addSubview:swiftUIView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [swiftUIView.topAnchor constraintEqualToAnchor:self.topAnchor],
+        [swiftUIView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor],
+        [swiftUIView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor],
+        [swiftUIView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor]
+    ]];
+    
+       UIViewController *parentViewController = [self parentViewController];
+       if (parentViewController) {
+           [parentViewController addChildViewController:_hostingController];
+           [_hostingController didMoveToParentViewController:parentViewController];
+       }
+    
+}
+
+- (void)updateRandomText:(NSString *)text {
+    [_hostingController updateWithText:text];
 }
 
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
@@ -50,6 +82,7 @@ using namespace facebook::react;
 
     if (oldViewProps.color != newViewProps.color) {
         NSString * colorToConvert = [[NSString alloc] initWithUTF8String: newViewProps.color.c_str()];
+        [self updateRandomText:colorToConvert];
         [_view setBackgroundColor:[self hexStringToColor:colorToConvert]];
     }
 
@@ -83,6 +116,14 @@ Class<RCTComponentViewProtocol> SuiViewViewCls(void)
     int b = (hex) & 0xFF;
     
     return [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:1.0f];
+}
+
+- (UIViewController *)parentViewController {
+    UIResponder *responder = self;
+    while ([responder isKindOfClass:[UIView class]]) {
+        responder = [responder nextResponder];
+    }
+    return (UIViewController *)responder;
 }
 
 @end

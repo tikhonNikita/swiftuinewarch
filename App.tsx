@@ -9,8 +9,8 @@ function App(): React.JSX.Element {
         onColorChange={event => {
           console.log(event.nativeEvent);
         }}
-        color="blue"
-        style={{width: 300, height: 300}}
+        color="green"
+        style={{width: 100, height: 150}}
       />
     </SafeAreaView>
   );

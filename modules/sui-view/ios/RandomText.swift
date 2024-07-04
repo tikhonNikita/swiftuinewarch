@@ -8,16 +8,12 @@
 import SwiftUI
 
 struct RandomText: View {
-    @State private var text: String = RandomStringGenerator.randomString(length: 10)
+    @ObservedObject var viewModel: RandomTextViewModel
     
     var body: some View {
-        Text(text)
+        Text(viewModel.text)
             .onTapGesture {
-                self.text = RandomStringGenerator.randomString(length: 10)
+                viewModel.updateText(text: RandomStringGenerator.randomString(length: 10))
             }
     }
-}
-
-#Preview {
-    RandomText()
 }
